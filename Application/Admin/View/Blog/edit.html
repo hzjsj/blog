@@ -1,0 +1,54 @@
+<extend name="Public/layui" />
+<block name="content">
+<form class="layui-form" action="__URL__/update" method="post" style="padding: 20px 0 0 0;">
+<input type="hidden" name='id' value="{$vo.id}"> 
+  <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">留言内容</label>
+    <div class="layui-input-block">
+      <textarea name="message" placeholder="请输入内容" class="layui-textarea" style="width: 300px;" >{$vo.message}</textarea>
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo">提交</button>
+      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+  </div>
+  </form>
+</block>
+<block name="js">
+<script>
+//Demo
+layui.use('form', function(){
+  var form = layui.form;
+  
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+    // layer.msg(JSON.stringify(data.field));
+    var load = layer.load(2);
+          $.ajax({
+          url:'{:U('blog/updately')}',
+          type:"post",
+          data:data.field,
+          dataType:"json",
+          success:function(r){
+              layer.close(load);
+              if (r.status == 1) {
+                  layer.msg(r.info, { icon: 1 }, function() {
+                      layer.close(index);
+                  });
+              } else {
+                  layer.msg(r.info, { icon: 2 }); //错误提示
+              }
+          },
+          error:function(){
+            layer.close(load);
+            layer.msg('网络错误！',{icon: 5});//错误提示
+          }
+        });
+    return false;
+  });
+});
+</script> 
+</block>

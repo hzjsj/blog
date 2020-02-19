@@ -1,0 +1,79 @@
+<extend name="Public/layui" />
+<block name="content">
+<form class="layui-form" action="__URL__/update" method="post" style="padding: 20px 0 0 0;">
+  <div class="layui-form-item">
+  <input type="hidden" name='id' value="{$vo.id}"> 
+    <label class="layui-form-label">昵称</label>
+    <div class="layui-input-inline">
+      <input type="text" name="nickname" value="{$vo.nickname}" required  lay-verify="required" placeholder="请输入昵称" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">账号</label>
+    <div class="layui-input-inline">
+      <input type="text" name="name" value="{$vo.name}" required  lay-verify="required" placeholder="请输入账号" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">密码</label>
+    <div class="layui-input-inline">
+      <input type="password" name="password"  required  autocomplete="off" class="layui-input">
+    </div>
+     <div class="layui-form-mid layui-word-aux">留空不修改密码</div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">QQ</label>
+    <div class="layui-input-inline">
+      <input type="text" name="qq" value="{$vo.qq}" required  lay-verify="required" placeholder="请输入QQ" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+   <div class="layui-form-item">
+    <label class="layui-form-label">性别</label>
+    <div class="layui-input-block">
+      <input type="radio" name="sex" value="1" title="男" <if condition="$vo['sex'] eq 1">checked </if>>
+      <input type="radio" name="sex" value="2" title="女" <if condition="$vo['sex'] eq 2">checked </if>>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo">提交</button>
+      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+  </div>
+  </form>
+</block>
+<block name="js">
+<script>
+//Demo
+layui.use('form', function(){
+  var form = layui.form;
+  
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+    // layer.msg(JSON.stringify(data.field));
+    var load = layer.load(2);
+          $.ajax({
+          url:'{:U('user/update')}',
+          type:"post",
+          data:data.field,
+          dataType:"json",
+          success:function(r){
+              layer.close(load);
+              if (r.status == 1) {
+                  layer.msg(r.info, { icon: 1 }, function() {
+                      layer.close(index);
+                  });
+              } else {
+                  layer.msg(r.info, { icon: 2 }); //错误提示
+              }
+          },
+          error:function(){
+            layer.close(load);
+            layer.msg('网络错误！',{icon: 5});//错误提示
+          }
+        });
+    return false;
+  });
+});
+</script> 
+</block>

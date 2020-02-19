@@ -1,0 +1,107 @@
+<extend name="Public/layui" />
+<block name="content">
+<div class="layui-card">
+<div class="layui-card-body">
+<table class="layui-hide" id="test" lay-filter="test"></table>
+ 
+<script type="text/html" id="toolbarDemo">
+  <div class="layui-btn-container">
+    <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+    <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+    <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+  </div>
+</script>
+ 
+<script type="text/html" id="barDemo">
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
+</script>
+              
+          
+
+<script>
+layui.use('table', function(){
+  var table = layui.table;
+  
+  table.render({
+    elem: '#test'
+     ,request: {
+    pageName: 'p' //页码的参数名称，默认：page
+    ,limitName: 'nums' //每页数据量的参数名，默认：limit
+  },
+    height: 430
+    ,url: '__ACTION__?is_get=1' //数据接口
+    ,toolbar: '#toolbarDemo'
+    ,title: '用户数据表'
+      ,response: {
+      statusName: 'status' //规定数据状态的字段名称，默认：code
+      ,statusCode: 1 //规定成功的状态码，默认：0
+      ,msgName: 'info' //规定状态信息的字段名称，默认：msg
+      ,countName: 'count' //规定数据总数的字段名称，默认：count
+      ,dataName: 'data' //规定数据列表的字段名称，默认：data
+    } 
+    ,cols: [[
+      {type: 'checkbox', fixed: 'left'}
+      ,{field:'id', title:'ID', width:60, fixed: 'left', unresize: true, sort: true}
+      ,{field:'name', title:'标题', width:160, edit: 'text'}
+      ,{field:'text', title:'内容',  edit: 'text'}
+      ,{field:'create_time', title:'发布时间', width:170 }
+      ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:80}
+    ]]
+    ,page: true
+     ,limit: 30
+  });
+  
+  //头工具栏事件
+  table.on('toolbar(test)', function(obj){
+    var checkStatus = table.checkStatus(obj.config.id);
+    switch(obj.event){
+      case 'getCheckData':
+        var data = checkStatus.data;
+        layer.alert(JSON.stringify(data));
+      break;
+      case 'getCheckLength':
+        var data = checkStatus.data;
+        layer.msg('选中了：'+ data.length + ' 个');
+      break;
+      case 'isAll':
+        layer.msg(checkStatus.isAll ? '全选': '未全选');
+      break;
+    };
+  });
+  
+  //监听行工具事件
+  table.on('tool(test)', function(obj){
+    var data = obj.data;
+    //console.log(obj)
+    if(obj.event === 'del'){
+      layer.confirm('真的删除行么', function(index){
+         var load = layer.load(2);
+                $.ajax({
+                    url: '{:U('delblog')}',
+                    type: "post",
+                    data: { id: data.id },
+                    dataType: "json",
+                    success: function(r) {
+                        layer.close(load);
+                        if (r.status == 1) {
+                            obj.del();
+                            layer.msg(r.info, { icon: 1 }, function() {
+                                layer.close(index);
+                            });
+                        } else {
+                            layer.msg(r.info, { icon: 2 }); //错误提示
+                        }
+                    },
+                    error: function() {
+                        layer.close(load);
+                        layer.msg('网络错误！', { icon: 2 }); //错误提示
+                    }
+                });
+      });
+    } 
+  });
+});
+</script>
+ </div>
+</div>
+</block>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>发布博客</title>
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/ht/layui/css/layui.css">
+  <script src="__PUBLIC__/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<form class="layui-form" method="post">
+<input type="hidden" name="uid" value="{:session('uid')}">
+<br>
+  <div class="layui-form-item">
+    <label class="layui-form-label">标题</label>
+    <div class="layui-input-inline">
+      <input type="text" name="name" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">内容</label>
+    <div class="layui-input-block">
+      <textarea name="text" lay-verify="required" placeholder="请输入内容" class="layui-textarea" style="width: 80%;"></textarea>
+    </div>
+  </div>
+
+
+<!--   <div class="layui-form-item">
+    <label class="layui-form-label">上传图片</label>
+    <div class="layui-input-inline">
+    <input type="file"  name="photo">
+    </div>
+  </div> -->
+      <div class="layui-form-item">
+      <label class="layui-form-label">图片</label>
+      <div class="layui-input-inline">
+        <input  name="photo" id="LAY_avatarSrc" placeholder="图片地址" class="layui-input">
+      </div>
+      <div class="layui-input-inline layui-btn-container" style="width: auto;">
+        <button type="button" class="layui-btn layui-btn-primary" id="test3">
+          <i class="layui-icon">&#xe67c;</i>上传图片
+        </button>
+        <button type="button" class="layui-btn layui-btn-primary chakan">查看图片</button>
+
+      </div>
+    </div>
+
+
+
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo">发布</button>
+      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+  </div>
+
+</form>
+<script src="__PUBLIC__/ht/layui/layui.js"></script>
+
+<script>
+//Demo
+layui.use(['form','upload'], function(){
+  var form = layui.form,
+  upload = layui.upload;
+
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+   var load = layer.load(2);
+          $.ajax({
+          url:'{:U('index/fabu')}',
+          type:"post",
+          data:data.field,
+          dataType:"json",
+          success:function(r){
+              layer.close(load);
+              if (r.status == 1) {
+                  layer.msg(r.info, { icon: 1 }, function() {
+                      // layer.close(index);
+                   window.location.reload();
+                  });
+              } else {
+                  layer.msg(r.info, { icon: 2 }); //错误提示
+              }
+          },
+          error:function(){
+            layer.close(load);
+            layer.msg('网络错误！',{icon: 5});//错误提示
+          }
+        });
+    return false;
+  });
+
+        //头像上传
+      var uploadInst1 = upload.render({
+        elem: '#test3'
+        , url: '{:U('index/webupload')}'
+        , done: function (res) {
+          //如果上传失败
+          if (res.status==1) {
+            layer.msg(res.msg);
+            $('#LAY_avatarSrc').attr('value', res.url);
+          }else{
+             layer.msg('上传失败!');
+          }        
+        }
+  });
+
+
+    $('.chakan').on('click', function () {
+      var a = ($("#LAY_avatarSrc").val());
+
+      layer.photos({
+        photos: {
+          title: "查看头像",
+          data: [{
+            src: a
+          }]
+        }
+        , anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+      });
+    });
+
+});
+</script>
+</body>
+</html>

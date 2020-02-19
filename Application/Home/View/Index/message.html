@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width" />
+    <meta name="author" content="www.yanshisan.cn" />
+    <meta name="robots" content="all" />
+    <title>留言板</title>
+    <link rel="stylesheet" href="__PUBLIC__/qd/font-awesome/css/font-awesome.min.css">
+   <link rel="stylesheet" type="text/css" href="__PUBLIC__/ht/layui/css/layui.css">
+    <link rel="stylesheet" href="__PUBLIC__/qd/css/master.css" />
+    <link rel="stylesheet" href="__PUBLIC__/qd/css/gloable.css" />
+    <link rel="stylesheet" href="__PUBLIC__/qd/css/nprogress.css" />
+    <link rel="stylesheet" href="__PUBLIC__/qd/css/message.css" /> 
+    <script src="__PUBLIC__/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <div class="header">
+    </div>
+    <header class="gird-header">
+        <div class="header-fixed">
+            <div class="header-inner">
+                <a href="{:U('index/index')}" class="header-logo" id="logo">Mr.Wxl</a>
+                <nav class="nav" id="nav">
+                    <ul>
+                        <li><a href="{:U('index/index')}">首页</a></li>
+                        <li><a href="{:U('index/message')}">留言</a></li>
+                        <li><a href="{:U('index/diary')}">日记</a></li>
+                        <li><a href="{:U('index/about')}">关于</a></li>
+                    </ul>
+                </nav>
+                 <empty name="Think.session.uid">
+                <a href="#" class="blog-user dr">
+               
+                    <i class="fa fa-qq"></i>
+                    <else/>
+                    <a href="{:U('login/logout')}" class="blog-user">
+                        <img src="//q4.qlogo.cn/headimg_dl?dst_uin={:session('qq')}&spec=100" alt="{:session('nickname')}" title="{:session('nickname')}">
+                    </a>
+                 </empty>
+                <a class="phone-menu">
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                </a>
+            </div>
+        </div>
+    </header>
+    <div class="doc-container" id="doc-container">
+        <div class="container-fixed">
+    <div class="container-inner">
+        <section class="msg-remark">
+            <h1>留言板</h1>
+            <p>
+                沟通交流，拉近你我！
+              
+            </p>
+        </section>
+        <div class="textarea-wrap message" id="textarea-wrap">
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+              <label class="layui-form-label">昵称：</label>
+              <div class="layui-input-inline">
+                <input type="text" name="name" required  lay-verify="required" placeholder="请输入昵称" autocomplete="off" class="layui-input">
+              </div>
+              <label class="layui-form-label">QQ:</label>
+              <div class="layui-input-inline">
+                <input type="text" name="qq" required lay-verify="required" placeholder="请输入QQ" autocomplete="off" class="layui-input">
+              </div>
+            </div>
+  
+            <div class="layui-form-item layui-form-text">
+              <label class="layui-form-label">留言：</label>
+              <div class="layui-input-block" style="width: 85%;">
+                <textarea name="message" lay-verify="content" id="remarkEditor" placeholder="请输入留言" class="layui-textarea layui-hide">
+                </textarea>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                <button class="layui-btn " lay-submit lay-filter="formDemo">提交留言</button>
+              <!--   <button type="reset" class="layui-btn layui-btn-primary">重置</button> -->
+              </div>
+            </div>
+        </form>
+        </div>
+    </div>
+    <div class="f-cb"></div>
+    <div class="mt20">
+        <ul class="message-list" id="message-list">
+        <volist name='message' id='vo'>
+            <li class="zoomIn article"> 
+                <div class="comment-parent">
+                    <a name="remark-1"></a>
+                    <img src="//q4.qlogo.cn/headimg_dl?dst_uin={$vo.qq}&spec=100" />
+                    <div class="info">
+                        <span class="username">{$vo.name}</span>
+                    </div>
+                    <div class="comment-content">
+                       
+                        {$vo.message}
+                       
+                    </div>
+                    <p class="info info-footer">
+                      <!--   <i class="fa fa-map-marker" aria-hidden="true"></i> -->
+                       <!--  <span>四川</span>  -->
+                        <span class="comment-time">{$vo.create_time}</span>
+                       <!--  <a href="javascript:;" class="btn-reply" data-targetid="1" data-targetname="燕十三">回复</a> -->
+                    </p>
+                </div>
+            </li>
+        </volist>
+           
+        </ul>
+
+    </div>
+      <div id="demo2" style="text-align: center;"></div>
+</div>
+    </div>
+     <footer class="grid-footer">
+        <div class="footer-fixed">
+            <div class="copyright">
+                <div class="info">
+                    <div class="contact">
+                        <a href="javascript:void(0)" class="github" target="_blank"><i class="fa fa-github"></i></a>
+                        <a href="http://wpa.qq.com/msgrd?v=3&uin=1665009812&site=qq&menu=yes" class="qq" target="_blank" title="1665009812"><i class="fa fa-qq"></i></a>
+                        <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=CGByYntiSHl5JmtnZQ" class="email" target="_blank" title="1665009812@qq.com"><i class="fa fa-envelope"></i></a>
+                        <a href="javascript；" class="weixin"><i class="fa fa-weixin"></i></a>
+                    </div>
+                    <p class="mt05">
+                        Copyright &copy; 2019-2019 王秀龙 All Rights Reserved V.2.0.0 皖ICP备19005551号
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="__PUBLIC__/ht/layui/layui.js"></script>
+    <script src="__PUBLIC__/qd/js/yss/gloable.js"></script>
+    <script src="__PUBLIC__/qd/js/plugins/nprogress.js"></script>
+    <script>NProgress.start();</script>
+    <script src="__PUBLIC__/qd/js/pagemessage.js"></script>
+    <script>NProgress.start();</script>
+    <script> 
+        window.onload = function () {
+            NProgress.done();
+        };
+    </script>
+    <script>
+//Demo
+layui.use(['form','laypage'], function(){
+  var form = layui.form;
+   var laypage = layui.laypage;
+    //自定义样式
+  laypage.render({
+    elem: 'demo2'
+    ,count: '{$count}'
+    ,curr:'{$curr}'
+    ,limit:25
+    ,theme: '#1E9FFF'
+    ,jump: function(obj, first){
+    if(!first){
+         location.href="{:U('index/message')}?p="+obj.curr;
+    }
+    }
+  });
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+   var load = layer.load(2);
+          $.ajax({
+          url:'{:U('index/addly')}',
+          type:"post",
+          data:data.field,
+          dataType:"json",
+          success:function(r){
+              layer.close(load);
+              if (r.status == 1) {
+                  layer.msg(r.info, { icon: 1 }, function() {
+                      // layer.close(index);
+                   window.location.reload();
+                  });
+              } else {
+                  layer.msg(r.info, { icon: 2 }); //错误提示
+              }
+          },
+          error:function(){
+            layer.close(load);
+            layer.msg('网络错误！',{icon: 5});//错误提示
+          }
+        });
+    return false;
+  });
+});
+</script>
+</body>
+</html>

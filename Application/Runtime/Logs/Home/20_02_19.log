@@ -1,0 +1,68 @@
+[ 2020-02-19T11:47:25+08:00 ] 127.0.0.1 /index.php/Home/login/logout.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001166s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001311s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001375s ]
+
+[ 2020-02-19T11:47:25+08:00 ] 127.0.0.1 /index.php/Home/index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000034s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001047s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001134s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001191s ]
+NOTIC: [8] Undefined index: title D:\project\blog\Application\Home\Controller\IndexController.class.php 第 105 行.
+SQL: SHOW COLUMNS FROM `tp3_blog` [ RunTime:0.0023s ]
+NOTIC: [8] Undefined variable: where D:\project\blog\Application\Home\Controller\IndexController.class.php 第 125 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `tp3_blog` LIMIT 1   [ RunTime:0.0004s ]
+NOTIC: [8] Undefined variable: where D:\project\blog\Application\Home\Controller\IndexController.class.php 第 127 行.
+SQL: SELECT `id`,`name`,`text`,`photo`,`create_time`,`uid` FROM `tp3_blog` ORDER BY id desc LIMIT 0,5   [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `tp3_message` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `tp3_message` ORDER BY id desc LIMIT 12   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `tp3_notice` [ RunTime:0.0012s ]
+SQL: SELECT * FROM `tp3_notice` WHERE `id` = 5 ORDER BY id desc LIMIT 1   [ RunTime:0.0011s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000147s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000230s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.022164s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.022222s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000691s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000736s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001335s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001398s ]
+
+[ 2020-02-19T11:47:27+08:00 ] 127.0.0.1 /index.php/Home/login/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001042s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.004091s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004290s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000097s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000165s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.022334s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.022404s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000864s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000929s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.003761s ]
+INFO: [ app_end ] --END-- [ RunTime:0.003842s ]
+
+[ 2020-02-19T11:47:33+08:00 ] 127.0.0.1 /index.php/Home/login/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000501s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000640s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000672s ]
+SQL: SHOW COLUMNS FROM `tp3_user` [ RunTime:0.0020s ]
+SQL: SELECT * FROM `tp3_user` WHERE `name` = 'admin' LIMIT 1   [ RunTime:0.0006s ]
+
