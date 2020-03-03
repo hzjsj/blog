@@ -12,7 +12,7 @@
 
 2、下载源码，修改Application/Common/Conf/config.php中的配置
 
-3、导入根目录下的blog.sql文件到数据库
+3、导入根目录下的blog.sql文件到数据库（管理员账号：admin 密码：123456）
 
 4、部署到本地或者服务器，看看效果 
 
