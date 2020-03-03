@@ -6,4 +6,4 @@
 1、部署环境：Apache和mysql
 2、下载源码，修改Application/Common/Conf/config.php中的配置
 3、导入根目录下的blog.sql文件到数据库
-4、部署到本地或者服务器，看卡效果
+4、部署到本地或者服务器，看看效果
